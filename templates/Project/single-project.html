@@ -1,0 +1,52 @@
+{% load static %}
+
+{% include 'static blocks\nav-bar.html'  %}
+
+    <!-- Start Header -->
+    <div class="header project-link" id="header">
+        <div class="bars" id="bars">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav show" id="nav">
+            <ul class="nav">
+                <li><a href="{% url 'home' %}">الصفحة الرئيسية</a></li>
+                <li><a href="{% url 'home' %}#about-me">من أنا ؟</a></li>
+                <li><a href="{% url 'home' %}#services">خدماتي</a></li>
+                <li><a href="{% url 'home' %}#exper-edu">سيرتي الذاتية</a></li>
+                <li><a class="active" href="{% url 'portofolio' %}">مشاريعي</a></li>
+                <li><a href="{% url 'home' %}#blog">مقالاتي</a></li>
+                <li><a href="{% url 'home' %}#contact">تواصل معي</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- End Header -->
+
+
+    
+    <!-- Start project -->
+    <div class="project" id="portofolio">
+        <div class="container">
+            <div class="project-boxs">
+                {% for project in projects %}
+                <div class="project-box">
+                    <h5 class="title">{{project.Title}}</h5>
+                    <span class="catigory">{{project.Type}}</span>
+                    <p class="project-description">{{project.Description}}</p>
+                    <a href="{{project.download_project.url}}" class="project-download" target="_blank">حمل ال{{project.Type}} </a>
+                </div>             
+                <img src="{{project.Picture.url}}">  
+                {% endfor %} 
+            </div>
+        </div>
+    </div>
+    <!-- End project -->
+
+
+
+
+
+{% include 'static blocks\footer.html'  %}
+
+ 

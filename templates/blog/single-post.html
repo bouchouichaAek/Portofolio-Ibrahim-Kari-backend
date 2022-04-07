@@ -1,0 +1,87 @@
+{% load static %}
+
+{% include 'static blocks\nav-bar.html'  %}
+
+    <!-- Start Header -->
+    <div class="header" id="header">
+      <div class="bars" id="bars">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav show" id="nav">
+        <ul class="nav">
+          <li>
+            <a class="active landing-link" href="{% url 'home' %}">الصفحة الرئيسية</a>
+          </li>
+          <li><a class="about-me" href="#about-me">من أنا ؟</a></li>
+          <li><a class="services" href="#services">خدماتي</a></li>
+          <li><a class="exper-edu" href="#exper-edu">سيرتي الذاتية</a></li>
+          <li><a class="portofolio" href="#portofolio">مشاريعي</a></li>
+          <li><a class="blog" href="#blog">مقالاتي</a></li>
+          <li><a class="contact" href="#contact">تواصل معي</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End Header -->
+
+    <!-- Start Blog-detail -->
+    <div class="blog-detail">
+        <div class="blog-image-info">
+            <div class="overlay"></div>
+            <img class="bl-image" src="{{artical.Blog_thumbnail.url}}" alt="">
+            <div class="blog-info">
+                <img src="{{artical.Blog_thumbnail.url}}" alt="">
+                <div class="blog-info-title">
+                    <div class="blog-date-category">
+                        <p class="blog-category">{{artical.Blog_category}}</p>
+                        <p class="blog-date"><i class="fa-solid fa-calendar"></i>{{artical.Blog_date}}</p>
+                    </div>
+                    <h1 class="title">{{artical.Blog_Title}}</h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- End Blog-detail -->
+
+    <!-- Start Blog-content -->
+    <div class="blog-content">
+        <div class="container">
+            <div class="blog-boxs">
+                <div class="artical-box">
+                    <div class="artical">
+                        <p class="p-artical">{{artical.Blog_content | safe }}</p>
+                    </div>
+                    <div class="share">
+                        <p class="p-share">انشر</p>
+                        <ul class="social-media">
+                            <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                            <li><a href=""><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href=""><i class="fas fa-envelope"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="other-arical">
+                    <h2 class="title-box">مقالات أخرى</h2>
+                    {% for ou_artical in outer_artical  %}
+                    <div class="box">
+                        <a class="link" href="{% url 'artical' ou_artical.id %}">
+                            <img src="{{ou_artical.Blog_thumbnail.url}}" alt="">
+                            <div class="text">
+                                <p class="title">{{ou_artical.Blog_Title}}</p>
+                                <p class="date"><i class="fa-solid fa-calendar"></i>{{artical.Blog_date}}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Blog-content -->
+
+
+
+{% include 'static blocks\footer.html'  %}

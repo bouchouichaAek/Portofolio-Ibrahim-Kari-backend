@@ -1,0 +1,91 @@
+{% load static %}
+
+{% include 'static blocks\nav-bar.html'  %}
+
+    <!-- Start Header -->
+
+    <div class="header project-link" id="header">
+        <div class="bars" id="bars">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav show" id="nav">
+            <ul class="nav">
+                <li><a href="{% url 'home' %}">الصفحة الرئيسية</a></li>
+                <li><a href="{% url 'home' %}#about-me">من أنا ؟</a></li>
+                <li><a href="{% url 'home' %}#services">خدماتي</a></li>
+                <li><a href="{% url 'home' %}#exper-edu">سيرتي الذاتية</a></li>
+                <li><a href="{% url 'home' %}#portofolio">مشاريعي</a></li>
+                <li><a class="active" href="{% url 'blogger' %}">مقالاتي</a></li>
+                <li><a href="{% url 'home' %}#contact">تواصل معي</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- End Header -->
+
+
+
+
+
+    <!-- Start Blog -->
+
+    <div class="blog" id="blog">
+        <div class="container">
+            <h2 class="title-second-page">مقالات</h2>
+            <div class="boxs-blogger">
+                {% for post in posts %}
+                <div class="box">
+                    <img src="{{post.Blog_thumbnail.url}}" alt="{{post.Blog_Title}}" class="img-fluid">
+                    <div class="blog-inner">
+                        <h2><a href="{% url 'artical' post.id %}" target="_blanck">{{post.Blog_Title}}</a></h2>
+                        <div class="post-info">
+                            <ul>
+                                <li><i class="fas fa-calendar-days"></i>
+                                    <p>{{post.Blog_date}}</p>
+                                </li>
+                                <li><i class="fas fa-comments"></i>
+                                    <p>20 تعليق</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <p>{{post.Blog_content | safe | slice:":98" }}</p>
+                        <a href="{% url 'artical' post.id %}" target="_blanck">قراءة المزيد</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Start Pagination -->
+
+       <div class="pagination">
+            {% if posts.has_previous %}
+             <a href="?page={{ posts.previous_page_number }}">Previous &raquo; </a>
+            {% else %}
+              <a>Previous</a>
+            {% endif %}
+            
+            {% for i in posts.paginator.page_range %}
+              {% if posts.number == i %}
+                <a class="active" href="?page={{ i }}">{{ i }} </a>
+              {% else %}
+                <a href="?page={{ i }}">{{ i }}</a>
+              {% endif %}
+            {% endfor %}
+
+            
+            {% if posts.has_next %}
+              <a href="?page={{ posts.next_page_number }}">Next &laquo;</a>
+            {% else %}
+              <a>Next</a>
+            {% endif %}
+        </div>
+   
+         <!-- End Pagination -->
+    </div>
+
+
+    <!-- End Blog -->
+
+{% include 'static blocks\footer.html'  %}

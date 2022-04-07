@@ -1,0 +1,60 @@
+{% load static %}
+
+{% include 'static blocks\nav-bar.html'  %}
+    <!-- Start Header -->
+    <div class="header project-link" id="header">
+        <div class="bars" id="bars">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav show" id="nav">
+            <ul class="nav">
+                <li><a href="{% url 'home' %}">الصفحة الرئيسية</a></li>
+                <li><a href="{% url 'home' %}#about-me">من أنا ؟</a></li>
+                <li><a href="{% url 'home' %}#services">خدماتي</a></li>
+                <li><a href="{% url 'home' %}#exper-edu">سيرتي الذاتية</a></li>
+                <li><a class="active" href="{% url 'portofolio' %}">مشاريعي</a></li>
+                <li><a href="{% url 'home' %}#blog">مقالاتي</a></li>
+                <li><a href="{% url 'home' %}#contact">تواصل معي</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- End Header -->
+
+    <!-- Start Portofolio -->
+    <div class="portofolio" id="portofolio">
+        <div class="container">
+            <div class="box-title">
+                <h2 class="title-second-page">مشاريعي</h2>
+                <form action="">
+                    <input type="search" name="" id="" placeholder="أبحث">
+                    <select name="pets" id="pet-select">
+                        <option value=".all">الكل</option>
+                        <option value=".book">الكتب</option>
+                        <option value=".picture">الصور</option>
+                        <option value=".videos">فيديوهات</option>
+                        <option value=".movies">أفلام</option>
+                        <option value=".design">تصاميم</option>
+                    </select>
+                </form>
+            </div>
+            <div class="boxs">
+                {% for project in portofolio %}
+                <a href="{% url 'project' %}" target="_blank">
+                <div class="box all {{project.get_Type_display}} ">
+                    <img src="{{project.Picture.url}}">
+                    <div class="fig-caption">
+                        <i class="fa fa-search"></i>
+                        <h5 class="title">{{project.Title}}</h5>
+                        <span class="sub-title">{{project.Type}}</span>
+                    </div>
+                </div>      
+                </a>                 
+                {% endfor %}                
+            </div>
+        </div>
+    </div>
+    <!-- End Portofolio -->
+
+{% include 'static blocks\footer.html'  %}
